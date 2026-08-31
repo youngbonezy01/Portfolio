@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Althea Marie Roa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0C0C0C;
+            --bg-card: #151515;
+            --text: #F0F0EC;
+            --text-muted: #777777;
+            --accent: #FFB6D9;
+            --accent-2: #FF6B9D;
+            --border: #2A2A2A;
+            --nav-bg: rgba(12, 12, 12, 0.7);
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Group right-side items together */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 182, 217, 0.4); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(255, 182, 217, 0); }
+        }
+
+        .theme-toggle-btn,
+        .mobile-menu-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover,
+        .mobile-menu-btn:hover {
+            border-color: var(--accent);
+            background: var(--bg-card);
+            transform: scale(1.1);
+        }
+
+        .mobile-menu-btn {
+            display: none; /* Hidden on desktop */
+        }
+
+        /* ============================================
+           PAGE HEADER
+           ============================================ */
+        .page-header {
+            padding: 10rem 3rem 4rem;
+            text-align: center;
+        }
+
+        .page-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.live { background: #4ADE80; }
+        .legend-dot.school { background: #FBBF24; }
+        .legend-dot.progress { background: #60A5FA; }
+
+        /* ============================================
+           PROJECTS GRID
+           ============================================ */
+        .projects-container {
+            padding: 4rem 3rem 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .badge-live {
+            background: #4ADE80;
+            color: #0C0C0C;
+        }
+
+        .badge-school {
+            background: #FBBF24;
+            color: #0C0C0C;
+        }
+
+        .badge-progress {
+            background: #60A5FA;
+            color: #0C0C0C;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.7rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .link-github {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .link-github:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .link-demo {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .link-demo:hover {
+            opacity: 0.9;
+        }
+
+        .link-demo.disabled {
+            background: var(--border);
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .section-divider {
+            grid-column: 1 / -1;
+            margin: 2rem 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            padding: 2rem 3rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           LIGHT THEME OVERRIDES
+           ============================================ */
+        body.light-theme {
+            --bg: #FAFAFA;
+            --bg-card: #FFFFFF;
+            --text: #111111;
+            --text-muted: #666666;
+            --accent: #FF4D8D;
+            --accent-2: #FFB6D9;
+            --border: #EAEAEA;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            
+            .nav-status {
+                display: none; /* Hide status text on mobile to save space */
+            }
+
+            .mobile-menu-btn {
+                display: flex; /* Show hamburger on mobile */
+            }
+
+            .nav-links {
+                display: none; /* Hidden by default */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card); /* Automatically white in light mode! */
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem 0;
+                border-bottom: 1px solid var(--border);
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                display: flex; /* Show when active */
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .page-header {
+                padding: 8rem 1.5rem 3rem;
+            }
+            .projects-container {
+                padding: 3rem 1.5rem 6rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .legend {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">althea<span>.</span></div>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        
+        <!-- Grouped right-side items -->
+        <div class="nav-right">
+            <div class="nav-status">
+                <div class="status-dot"></div>
+                <span>Available</span>
+            </div>
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">🌙</button>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="page-label">Portfolio</div>
+        <h1 class="page-title">All My Projects</h1>
+        <p class="page-subtitle">
+            A collection of my work — from school assignments to personal experiments. 
+            Some are polished, some are works in progress, but all taught me something.
+        </p>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot live"></div>
+                <span>Live & Deployed</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot school"></div>
+                <span>School Project</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot progress"></div>
+                <span>In Progress</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="projects-container">
+        <div class="projects-grid">
+
+            <!-- LIVE PROJECTS -->
+            <div class="section-divider">
+                <h2 class="section-title">🚀 Live Projects</h2>
+                <p class="section-subtitle">Deployed and ready to explore</p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="img/Mrs.Braves.png" alt="Mrs. Brave's Cakes Website Screenshot">
+                    <span class="project-badge badge-live">Live</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-category">Live Project</div>
+                    <h3 class="project-title">Mrs. Brave's Cakes</h3>
+                    <p class="project-desc">
+                        A fully deployed cake business website featuring custom cake design tools, 
+                        online ordering system, and a comprehensive admin dashboard for order 
+                        management, inventory tracking, and customer communications. Made with a Team <b>StressWare</b>.                   
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link link-demo" target="_blank">Live Demo ↗</a>
+                        <a href="https://github.com/StressWare/Capstone-CakeShop1" class="project-link link-github" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCHOOL PROJECTS -->
+            <div class="section-divider">
+                <h2 class="section-title">📚 School Projects</h2>
+                <p class="section-subtitle">Academic assignments and learning exercises</p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #FBBF24, #F59E0B);">
+                    💳
+                    <span class="project-badge badge-school">School</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-category">Web Development Course</div>
+                    <h3 class="project-title">SmartSpend</h3>
+                    <p class="project-desc">
+                        A user-friendly budget tracker. 
+                        Built with Python as backend and HTML/CSS/JavaScript for design.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">Responsive Design</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link link-demo disabled">Not Deployed</a>
+                        <a href="#" class="project-link link-github" target="_blank">View Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #60A5FA, #3B82F6);">
+                    💰
+                    <span class="project-badge badge-school">School</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-category">JavaScript Course</div>
+                    <h3 class="project-title">Ca$hWise App</h3>
+                    <p class="project-desc">
+                        Interactive budget tracker app. 
+                        Features add, delete, mark complete, and filter tasks.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">DOM Manipulation</span>
+                        <span class="tech-tag">Local Storage</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link link-demo disabled">Not Deployed</a>
+                        <a href="#" class="project-link link-github" target="_blank">View Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #A78BFA, #8B5CF6);">
+                    📚
+                    <span class="project-badge badge-school">School</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-category">Database Course</div>
+                    <h3 class="project-title">Library Management System</h3>
+                    <p class="project-desc">
+                        Console-based application for managing book inventory and user accounts. 
+                        Implemented CRUD operations with MySQL.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">SQL</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link link-demo disabled">Not Deployed</a>
+                        <a href="#" class="project-link link-github" target="_blank">View Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IN PROGRESS -->
+            <div class="section-divider">
+                <h2 class="section-title">🔨 In Progress</h2>
+                <p class="section-subtitle">Currently building and learning</p>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #34D399, #10B981);">
+                    📸
+                    <span class="project-badge badge-progress">In Progress</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-category">Personal Project</div>
+                    <h3 class="project-title">Online Photobooth</h3>
+                    <p class="project-desc">
+                        An online Photobooth you can take pictures with your loved ones. 
+                        Currently working on more effects and filters.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link link-demo disabled">Coming Soon</a>
+                        <a href="#" class="project-link link-github" target="_blank">View Code</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Althea Marie Roa. Built with 💗 and lots of coffee.</p>
+        <p style="margin-top: 0.5rem;"><a href="index.html">← Back to Home</a></p>
+    </footer>
+
+    <script>
+        // ============================================
+        // THEME TOGGLE LOGIC
+        // ============================================
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // 1. Check if user previously chose light mode on load
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-theme');
+            if(themeToggle) themeToggle.textContent = '☀️';
+        } else {
+            if(themeToggle) themeToggle.textContent = '🌙';
+        }
+
+        // 2. Handle clicks
+        if(themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-theme');
+                
+                if (body.classList.contains('light-theme')) {
+                    themeToggle.textContent = '☀️';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    themeToggle.textContent = '🌙';
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        }
+
+        // ============================================
+        // MOBILE MENU TOGGLE
+        // ============================================
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                // Change icon from hamburger (☰) to close (✕)
+                mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.textContent = '☰';
+                });
+            });
+        }
+    </script>
+</body>
+</html>

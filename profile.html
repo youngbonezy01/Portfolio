@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Althea Marie Roa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0C0C0C;
+            --bg-card: #151515;
+            --text: #F0F0EC;
+            --text-muted: #777777;
+            --accent: #FFB6D9;
+            --accent-2: #FF6B9D;
+            --border: #2A2A2A;
+            --nav-bg: rgba(12, 12, 12, 0.7);
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Group right-side items together */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 182, 217, 0.4); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(255, 182, 217, 0); }
+        }
+
+        .theme-toggle-btn,
+        .mobile-menu-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover,
+        .mobile-menu-btn:hover {
+            border-color: var(--accent);
+            background: var(--bg-card);
+            transform: scale(1.1);
+        }
+
+        .mobile-menu-btn {
+            display: none; /* Hidden on desktop */
+        }
+
+        /* ============================================
+           PROFILE HEADER
+           ============================================ */
+        .profile-header {
+            padding: 12rem 3rem 6rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-photo {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 6rem;
+            font-weight: 700;
+            color: var(--bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-photo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.1) 10px,
+                rgba(255,255,255,0.1) 20px
+            );
+            animation: shimmer 20s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translate(-50%, -50%); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .profile-intro h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+        }
+
+        .profile-intro h1 span {
+            color: var(--accent);
+        }
+
+        .profile-intro .tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .profile-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+           SECTIONS
+           ============================================ */
+        .section {
+            padding: 4rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 40px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .bio-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .bio-text strong {
+            color: var(--text);
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .interest-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .interest-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .interest-title {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .interest-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .values-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .values-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        .values-list li::before {
+            content: '▹';
+            color: var(--accent);
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+
+        .values-list li strong {
+            color: var(--text);
+        }
+
+        .fun-facts {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-top: 3rem;
+            border: 1px solid var(--border);
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .fact-item {
+            text-align: center;
+        }
+
+        .fact-number {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .fact-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .info-item {
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        footer {
+            padding: 3rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           LIGHT THEME OVERRIDES
+           ============================================ */
+        body.light-theme {
+            --bg: #FAFAFA;
+            --bg-card: #FFFFFF;
+            --text: #111111;
+            --text-muted: #666666;
+            --accent: #FF4D8D; 
+            --accent-2: #FFB6D9;
+            --border: #EAEAEA;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            
+            .nav-status {
+                display: none; /* Hide status text on mobile to save space */
+            }
+
+            .mobile-menu-btn {
+                display: flex; /* Show hamburger on mobile */
+            }
+
+            .nav-links {
+                display: none; /* Hidden by default */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card); /* Automatically white in light mode! */
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem 0;
+                border-bottom: 1px solid var(--border);
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                display: flex; /* Show when active */
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .profile-header {
+                grid-template-columns: 1fr;
+                padding: 10rem 1.5rem 4rem;
+                text-align: center;
+                gap: 2rem;
+            }
+            .profile-photo {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            .section {
+                padding: 3rem 1.5rem;
+            }
+            .fun-facts {
+                padding: 2rem 1.5rem;
+            }
+            .facts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ============================================
+        CONTACT FORM STYLES
+        ============================================ */
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+
+        .form-input, 
+        .form-textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-input::placeholder, 
+        .form-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-input:focus, 
+        .form-textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 182, 217, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-button {
+            align-self: flex-start;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-button:hover {
+            background: var(--accent-2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 182, 217, 0.3);
+        }
+
+        /* Light mode adjustments for form */
+        body.light-theme .form-input, 
+        body.light-theme .form-textarea {
+            background: #FFFFFF;
+            border-color: #EAEAEA;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">althea<span>.</span></div>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        
+        <!-- Grouped right-side items -->
+        <div class="nav-right">
+            <div class="nav-status">
+                <div class="status-dot"></div>
+                <span>Available</span>
+            </div>
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">🌙</button>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+        </div>
+    </nav>
+
+    <header class="profile-header">
+        <div class="profile-photo">AR</div>
+        <div class="profile-intro">
+            <h1>Hi, I'm <span>Althea Marie Roa</span></h1>
+            <p class="tagline">UI/UX Designer & Web Developer | Multi-Skilled Creative</p>
+            <div class="profile-location">
+                <span>📍</span>
+                <span>DHPP, Iloilo, Philippines</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">My Story</h2>
+        <p class="bio-text">
+            <strong>I'm a Junior Developer, Multi-Skilled Creative, and Cinematographer.</strong> 
+            With 5+ years of experience in graphic design and a passion for technology, I create 
+            user-centered digital and print marketing materials from initial concept to final, 
+            polished deliverable.
+        </p>
+        <p class="bio-text">
+            I'm currently pursuing my <strong>Bachelor of Science in Information Technology</strong> 
+            at PHINMA Education (2026-2027), expanding my skills in web development, UI/UX design, 
+            and modern technologies.
+        </p>
+        <p class="bio-text">
+            Motivated and results-driven, I have a proven ability to lead and am committed to 
+            delivering high-quality work. I'm still learning, still growing, and still working 
+            on my masterpiece. ^^
+        </p>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Birthday</div>
+                <div class="info-value">January 6, 2005</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Age</div>
+                <div class="info-value">21 years old</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Email</div>
+                <div class="info-value">althearoa06@gmail.com</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Phone</div>
+                <div class="info-value">0906-067-4256</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Website</div>
+                <div class="info-value">www.altheaxcreatives.com</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Freelance</div>
+                <div class="info-value">Available</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+        <h2 class="section-title">What I Do</h2>
+        <div class="interests-grid">
+            <div class="interest-card">
+                <div class="interest-icon">🎨</div>
+                <div class="interest-title">UI/UX Design</div>
+                <div class="interest-desc">Creating intuitive and beautiful user interfaces that provide exceptional user experiences.</div>
+            </div>
+            <div class="interest-card">
+                <div class="interest-icon">💻</div>
+                <div class="interest-title">Web Development</div>
+                <div class="interest-desc">Building responsive, modern websites and web applications with clean code.</div>
+            </div>
+            <div class="interest-card">
+                <div class="interest-icon">📐</div>
+                <div class="interest-title">Graphic Design</div>
+                <div class="interest-desc">Designing logos, brochures, infographics, presentations, and advertisements.</div>
+            </div>
+            <div class="interest-card">
+                <div class="interest-icon">🎬</div>
+                <div class="interest-title">Video Production</div>
+                <div class="interest-desc">Creating promotional videos, social media content, company films, and ads.</div>
+            </div>
+            <div class="interest-card">
+                <div class="interest-icon">🌐</div>
+                <div class="interest-title">Cloud Services</div>
+                <div class="interest-desc">Moving data and apps to the cloud (Microsoft 365, Google Cloud) and managing them.</div>
+            </div>
+            <div class="interest-card">
+                <div class="interest-icon">🔧</div>
+                <div class="interest-title">IT Support</div>
+                <div class="interest-desc">Providing technical support, network setup, and system maintenance.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Education</h2>
+        
+        <div style="margin-top: 2rem;">
+            <div style="padding: 1.5rem; background: var(--bg-card); border-left: 4px solid var(--accent); margin-bottom: 1.5rem; border-radius: 0 8px 8px 0; border: 1px solid var(--border); border-left-width: 4px;">
+                <h3 style="font-family: var(--font-heading); margin-bottom: 0.5rem;">PHINMA Education & Programming</h3>
+                <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem;">2026-2027</p>
+                <p style="color: var(--text-muted);"><strong>Bachelor of Science - Information Technology</strong></p>
+            </div>
+
+            <div style="padding: 1.5rem; background: var(--bg-card); border-left: 4px solid var(--accent-2); margin-bottom: 1.5rem; border-radius: 0 8px 8px 0; border: 1px solid var(--border); border-left-width: 4px;">
+                <h3 style="font-family: var(--font-heading); margin-bottom: 0.5rem;">PHINMA Education & TVL-ICT</h3>
+                <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem;">2010-2014</p>
+                <p style="color: var(--text-muted);"><strong>Technical Vocational Livelihood</strong></p>
+            </div>
+
+            <div style="padding: 1.5rem; background: var(--bg-card); border-left: 4px solid var(--accent); margin-bottom: 1.5rem; border-radius: 0 8px 8px 0; border: 1px solid var(--border); border-left-width: 4px;">
+                <h3 style="font-family: var(--font-heading); margin-bottom: 0.5rem;">Graphic Design Specialist</h3>
+                <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem;">Multi-Skilled Creative</p>
+                <ul style="color: var(--text-muted); padding-left: 1.5rem; margin-top: 1rem; line-height: 1.8;">
+                    <li>Developed numerous marketing programs (logos, brochures, infographics, presentations, and advertisements)</li>
+                    <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
+                    <li>Recommended and consulted with clients on the most appropriate graphic design</li>
+                    <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border);">
+        <h2 class="section-title">What I Believe In</h2>
+        <ul class="values-list">
+            <li><strong>Innovation meets deadlines.</strong> I'm innovative and deadline-driven, ensuring quality work delivered on time.</li>
+            <li><strong>Design with purpose.</strong> Every design should serve a clear purpose and meet user needs.</li>
+            <li><strong>Continuous learning.</strong> The tech world evolves fast, and I'm committed to always learning and growing.</li>
+            <li><strong>Client-focused approach.</strong> Understanding client needs and delivering solutions that exceed expectations.</li>
+            <li><strong>Quality over quantity.</strong> Committed to delivering high-quality work that contributes to team success.</li>
+        </ul>
+
+        <div class="fun-facts">
+            <h2 class="section-title" style="margin-bottom: 0;">Fun Facts</h2>
+            <div class="facts-grid">
+                <div class="fact-item">
+                    <span class="fact-number">5+</span>
+                    <div class="fact-label">Years of Experience</div>
+                </div>
+                <div class="fact-item">
+                    <span class="fact-number">10+</span>
+                    <div class="fact-label">Projects Completed</div>
+                </div>
+                <div class="fact-item">
+                    <span class="fact-number">21</span>
+                    <div class="fact-label">Years Young</div>
+                </div>
+                <div class="fact-item">
+                    <span class="fact-number">∞</span>
+                    <div class="fact-label">Creativity Level</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact" style="text-align: center;">
+        <h2 class="section-title" style="justify-content: center;">Let's Work Together</h2>
+        <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem;">
+            I'm available for freelance work and always open to discussing new projects, 
+            creative ideas, or opportunities to be part of your visions.
+        </p>
+        <a href="mailto:althearoa06@gmail.com" style="display: inline-flex; align-items: center; gap: 1rem; font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--accent); padding: 1rem 2.5rem; border: 2px solid var(--accent); border-radius: 60px; transition: all 0.3s ease; margin: 1rem 0;">
+            althearoa06@gmail.com ↗
+        </a>
+        <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 3rem; flex-wrap: wrap;">
+            <a href="https://www.altheaxcreatives.com" target="_blank" style="font-size: 0.9rem; color: var(--text-muted); transition: color 0.3s ease;">Website</a>
+            <a href="#" style="font-size: 0.9rem; color: var(--text-muted); transition: color 0.3s ease;">GitHub</a>
+            <a href="#" style="font-size: 0.9rem; color: var(--text-muted); transition: color 0.3s ease;">LinkedIn</a>
+        </div>
+    </section>
+<section class="section" id="contact" style="text-align: center;">
+    <h2 class="section-title" style="justify-content: center;">Let's Work Together</h2>
+    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem;">
+        Have a project in mind? Fill out the form below or email me directly. 
+        I usually respond within 24 hours!
+    </p>
+
+    <!-- BEAUTIFUL NETLIFY FORM -->
+    <form name="contact" method="POST" data-netlify="true" class="contact-form">
+        <!-- Hidden input required for Netlify to work -->
+        <input type="hidden" name="form-name" value="contact" />
+        
+        <div class="form-group">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea id="message" name="message" class="form-textarea" placeholder="Tell me about your project..." required></textarea>
+        </div>
+
+        <button type="submit" class="form-button">
+            Send Message <span>→</span>
+        </button>
+    </form>
+</section>
+    <footer>
+        <p>© 2026 Althea Marie Roa. Built with 💗 and determination in Iloilo.</p>
+        <p style="margin-top: 0.5rem;"><a href="index.html">← Back to Home</a></p>
+    </footer>
+
+    <script>
+        // ============================================
+        // THEME TOGGLE LOGIC
+        // ============================================
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // 1. Check if user previously chose light mode on load
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-theme');
+            if(themeToggle) themeToggle.textContent = '☀️';
+        } else {
+            if(themeToggle) themeToggle.textContent = '🌙';
+        }
+
+        // 2. Handle clicks
+        if(themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-theme');
+                
+                if (body.classList.contains('light-theme')) {
+                    themeToggle.textContent = '☀️';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    themeToggle.textContent = '🌙';
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        }
+
+        // ============================================
+        // MOBILE MENU TOGGLE
+        // ============================================
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                // Change icon from hamburger (☰) to close (✕)
+                mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.textContent = '☰';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
